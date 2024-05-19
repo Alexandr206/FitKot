@@ -1,12 +1,12 @@
-package com.example.fitkot
+package com.example.fitkot.dialog
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.fitkot.R
 import com.example.fitkot.database.UserRepository
 import com.example.fitkot.models.User
 import kotlinx.coroutines.CoroutineScope
@@ -27,6 +27,10 @@ class RegistrationDialog(context: Context, private val userRepository: UserRepos
         val passwordInput: EditText = view.findViewById(R.id.passwordInput)
         val confirmPasswordInput: EditText = view.findViewById(R.id.confirmPasswordInput)
         val confirmButton: Button = view.findViewById(R.id.confirmButton)
+        val cancelButton: Button = view.findViewById(R.id.cancelButton)
+
+        builder.setView(view)
+        dialog = builder.create()
 
         confirmButton.setOnClickListener {
             val email = emailInput.text.toString()
@@ -34,7 +38,6 @@ class RegistrationDialog(context: Context, private val userRepository: UserRepos
             val password = passwordInput.text.toString()
             val confirmPassword = confirmPasswordInput.text.toString()
 
-            // Проверка ввода
             if (email.isEmpty() || fullName.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(context, "Пожалуйста, заполните все поля", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -45,7 +48,6 @@ class RegistrationDialog(context: Context, private val userRepository: UserRepos
                 return@setOnClickListener
             }
 
-            // Проверка наличия пользователя с таким email
             scope.launch {
                 userRepository.getUserByEmail(email).collect { existingUser ->
                     if (existingUser != null) {
@@ -53,20 +55,18 @@ class RegistrationDialog(context: Context, private val userRepository: UserRepos
                         return@collect
                     }
 
-                    // Создание нового пользователя
                     val newUser = User(email = email, fullName = fullName, password = password, role = "Пользователь")
                     userRepository.insertUser(newUser)
 
-                    // Переход на страницу профиля
-                    val intent = Intent(context, ProfileActivity::class.java)
-                    context.startActivity(intent)
-                    //dialog.dismiss()
+                    Toast.makeText(context, "Регистрация прошла успешно", Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
                 }
             }
         }
 
-        builder.setView(view)
-        dialog = builder.create() // Инициализация dialog
+        cancelButton.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 
     fun show() {

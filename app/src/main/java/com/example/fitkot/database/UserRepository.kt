@@ -13,7 +13,7 @@ class UserRepository(context: Context) {
         context,
         AppDatabase::class.java,
         "user_database"
-    ).allowMainThreadQueries().build()
+    ).build()
 
     private val userDao = database.userDao()
 
@@ -29,4 +29,10 @@ class UserRepository(context: Context) {
     }
 
     fun getUserById(userId: Int): Flow<User> = userDao.getUserById(userId)
+
+    fun getAllUsers(): Flow<List<User>> = userDao.getAllUsers()
+
+    suspend fun deleteUser(user: User) {
+        userDao.delete(user)
+    }
 }

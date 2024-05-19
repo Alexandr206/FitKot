@@ -32,10 +32,25 @@
         android:hint="Повторить пароль"
         android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/confirmButton"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Подтвердить" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Отмена" />
+
+        <Button
+            android:id="@+id/confirmButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Подтвердить" />
+
+    </LinearLayout>
 
 </LinearLayout>

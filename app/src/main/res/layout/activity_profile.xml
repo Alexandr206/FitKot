@@ -24,4 +24,18 @@
         android:layout_height="wrap_content"
         android:textSize="18sp" />
 
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Выйти" />
+
+    <Button
+        android:id="@+id/usersListButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Список пользователей" />
+
 </LinearLayout>
