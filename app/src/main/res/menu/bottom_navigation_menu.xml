@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_news"
+
+        android:title="Новости" />
+
+    <item
+        android:id="@+id/navigation_map"
+
+        android:title="Карта" />
+
+    <item
+        android:id="@+id/navigation_messages"
+
+        android:title="Сообщения" />
+
+    <item
+        android:id="@+id/navigation_trainers"
+
+        android:title="Тренера" />
+
+    <item
+        android:id="@+id/navigation_profile"
+
+        android:title="Профиль" />
+
+</menu>
