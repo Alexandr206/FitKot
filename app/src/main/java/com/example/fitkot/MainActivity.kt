@@ -1,11 +1,12 @@
 package com.example.fitkot
 
 import android.os.Bundle
-import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fitkot.database.UserRepository
 import com.example.fitkot.dialog.LoginDialog
 import com.example.fitkot.dialog.RegistrationDialog
+import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
     private lateinit var userRepository: UserRepository
@@ -16,17 +17,16 @@ class MainActivity : AppCompatActivity() {
 
         userRepository = UserRepository(this)
 
-        val loginButton = findViewById<Button>(R.id.loginButton)
+        val loginButton = findViewById<MaterialButton>(R.id.loginButton)
         loginButton.setOnClickListener {
             LoginDialog(this, userRepository).show()
         }
 
-        val registrationButton: Button = findViewById(R.id.registrationButton) // Замените на ваш ID кнопки
+        val registrationButton: TextView = findViewById(R.id.registrationButton) // Используем TextView
 
         registrationButton.setOnClickListener {
             val registrationDialog = RegistrationDialog(this, userRepository)
             registrationDialog.show()
         }
-
     }
 }
